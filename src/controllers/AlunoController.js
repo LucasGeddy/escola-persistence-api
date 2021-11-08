@@ -1,7 +1,7 @@
 import Aluno from '../models/Aluno';
 
 class HomeController {
-    async index(req, res) {
+    async create(req, res) {
         const novoAluno = await Aluno.create({
             nome: req.body.nome,
             sobrenome: req.body.sobrenome,
