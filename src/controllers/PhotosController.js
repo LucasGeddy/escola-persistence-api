@@ -1,7 +1,7 @@
 import multer from 'multer';
 import multerConfig from '../config/multer';
 
-const upload = multer(multerConfig).single('foto');
+const upload = multer(multerConfig).single('file');
 
 class PhotosController {
     async store(req, res) {
