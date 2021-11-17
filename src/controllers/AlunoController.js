@@ -20,7 +20,7 @@ class AlunoController {
                 order: [['id', 'DESC'], [Photo, 'id', 'DESC']],
                 include: {
                     model: Photo,
-                    attributes: ['filename'],
+                    attributes: ['filename', 'url'],
                 },
             });
             return res.json(alunos);
@@ -41,7 +41,7 @@ class AlunoController {
                     order: [['id', 'DESC'], [Photo, 'id', 'DESC']],
                     include: {
                         model: Photo,
-                        attributes: ['filename'],
+                        attributes: ['filename', 'url'],
                     },
                 });
 
