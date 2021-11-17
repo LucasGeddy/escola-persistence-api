@@ -1,3 +1,3 @@
 export default {
-    url: 'http://localhost:4044',
+    url: process.env.APP_URL,
 };
