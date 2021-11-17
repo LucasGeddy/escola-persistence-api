@@ -1,4 +1,5 @@
 import Aluno from '../models/Aluno';
+import Photo from '../models/Photo';
 
 class AlunoController {
     async create(req, res) {
@@ -14,7 +15,14 @@ class AlunoController {
 
     async listAll(req, res) {
         try {
-            const alunos = await Aluno.findAll();
+            const alunos = await Aluno.findAll({
+                attributes: ['id', 'nome', 'sobrenome', 'email', 'idade', 'peso', 'altura'],
+                order: [['id', 'DESC'], [Photo, 'id', 'DESC']],
+                include: {
+                    model: Photo,
+                    attributes: ['filename'],
+                },
+            });
             return res.json(alunos);
         } catch (e) {
             return res.status(400).json({
@@ -27,7 +35,15 @@ class AlunoController {
         try {
             if (!req.params.id) return res.status(401).json({ errors: 'Invalid Aluno.id' });
 
-            const aluno = await Aluno.findByPk(req.params.id);
+            const aluno = await Aluno.findByPk(req.params.id,
+                {
+                    attributes: ['id', 'nome', 'sobrenome', 'email', 'idade', 'peso', 'altura'],
+                    order: [['id', 'DESC'], [Photo, 'id', 'DESC']],
+                    include: {
+                        model: Photo,
+                        attributes: ['filename'],
+                    },
+                });
 
             if (!aluno) return res.status(404).json({ errors: 'Aluno not found' });
 
